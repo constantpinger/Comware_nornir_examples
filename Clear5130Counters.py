@@ -1,7 +1,7 @@
+
 # ================================================================== #
 # clear interface counters from all 5130
 # ================================================================== #
-from MyNornirModule import set_u_p
 from nornir import InitNornir
 from nornir.plugins.tasks.networking import netmiko_send_command
 
@@ -15,6 +15,10 @@ nr = InitNornir(
         },
     }
 )
+def set_u_p(username=None, password=None):
+    for host_obj in nr.inventory.hosts.values():
+        host_obj.username = username
+        host_obj.password = password
 
 def Clear5130InterfaceCounters():
     procurve_sys = nr.filter(typeName="HPE 5130-48G-PoE+-4SFP+(370W)EI")
@@ -30,4 +34,3 @@ set_u_p(username , password)   #TODO fix if u/p wrong
 
 Clear5130InterfaceCounters()
 print("All 5130 Interface counters cleared ")
-#TODO report 5130 that didn't respond
