@@ -4,6 +4,7 @@
 # ================================================================== #
 from nornir import InitNornir
 from nornir.plugins.tasks.networking import netmiko_send_command
+from getpass import getpass
 
 nr = InitNornir(
     core={"num_workers": 1000},
